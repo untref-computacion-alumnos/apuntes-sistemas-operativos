@@ -14,6 +14,7 @@ project:
     - title: Ejercicios
       children:
         - file: content/ejercicios/trabajo-practico-1.md
+        - file: content/ejercicios/trabajo-practico-2.md
     - title: Exámenes
       children:
         - file: content/examenes/final-02-08-2025.md
