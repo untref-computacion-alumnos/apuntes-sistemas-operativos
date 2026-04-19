@@ -2,6 +2,8 @@
   "editor.formatOnSave": true,
   "files.insertFinalNewline": true,
   "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrapColumn": 100,
+    "editor.rulers": [100]
   }
 }
