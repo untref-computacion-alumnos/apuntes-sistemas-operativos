@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "files.insertFinalNewline": true,
+  "[markdown_latex_combined]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "editor.renderWhitespace": "all",
+}

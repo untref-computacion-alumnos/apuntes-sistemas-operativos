@@ -1,0 +1,64 @@
+# Ver documentación en: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  title: Apuntes de Sistemas Operativos
+  description: Apuntes de Sistemas Operativos de la carrera Ingeniería en Computación (UNTREF)
+  keywords:
+    - untref
+    - ingeniería en computación
+    - sistemas operativos
+  authors:
+    - name: Gastón Augusto Ribero
+      github: trigologiaa
+  github: untref-computacion-alumnos/apuntes-sistemas-operativos
+  # bibliography: []
+  toc:
+    - file: contenidos/introduccion.md
+    - title: Apuntes
+      children:
+        - file: contenidos/apuntes/01-ejecucion-de-programas.md
+        - file: contenidos/apuntes/02-sistemas-operativos.md
+    - title: Materiales
+      children:
+        - title: Ejercicios
+          children:
+            - file: contenidos/materiales/ejercicios/archivo-1.md
+            - file: contenidos/materiales/ejercicios/archivo-2.md
+        - title: Trabajos Prácticos
+          children:
+            - file: contenidos/materiales/trabajos-practicos/trabajo-practico-1.md
+            - file: contenidos/materiales/trabajos-practicos/trabajo-practico-2.md
+            - file: contenidos/materiales/trabajos-practicos/trabajo-practico-3.md
+            - file: contenidos/materiales/trabajos-practicos/trabajo-practico-4.md
+        - title: Exámenes
+          children:
+            - file: contenidos/materiales/examenes/final-02-08-2025.md
+site:
+  template: book-theme
+  title: Apuntes de Sistemas Operativos
+  options:
+    hide_toc: false
+    hide_footer_links: false
+    hide_outline: false
+    hide_title_block: false
+    hide_authors: false
+    hide_search: false
+    # outline_maxdepth: number
+    twitter: untref
+    favicon: imagenes/sitio/favicon.ico
+    logo_dark: imagenes/sitio/untref-logo-blanco.svg
+    logo: imagenes/sitio/untref-logo-negro.svg
+    logo_text: Sistemas Operativos
+    logo_url: https://www.untref.edu.ar
+    logo_alt: UNTREF - Universidad Nacional de Tres de Febrero
+    # analytics_google: string
+    # analytics_plausible: string
+    # numbered_references: boolean
+    folders: false
+    # internal_domains: string
+    # style: file
+  # nav: []
+  # actions:
+  #   - title: Learn More
+  #     url: https://mystmd.org/guide
+  # domains: []
