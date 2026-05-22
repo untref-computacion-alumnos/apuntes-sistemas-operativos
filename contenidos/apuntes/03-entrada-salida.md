@@ -139,10 +139,12 @@ Las fases de ejecución típicas de una instrucción con referencia a memoria so
 - **Decode (decodificación)**: Proceso interno de la CPU que no utiliza el bus ($2 \text{ns} \times 0.5 \text{ns} = 2 \%$ del tiempo total).
 - **Execute (ejecución)**: Utiliza el bus para leer o escribir operandos en la RAM ($2 \text{ns} \times 10 \text{ns} = 49 \%$ del tiempo total).
 
-:::{admonition} Consecuencia
-:class: attention
+```{admonition} Consecuencia
+---
+class: attention
+---
 Si el DMAC ocupa el bus durante un ciclo, **demora entre el $24 \%$ y el $50 \%$ de la ejecución de una sola instrucción** de la CPU.
-:::
+```
 
 (03-entrada-salida-6-2-arquitectura-con-memoria-cache)=
 
@@ -154,10 +156,12 @@ Cuando todas las instrucciones y datos se encuentran pre-cargados en la caché, 
 - **Decode (decodificación)**: Interno a la CPU ($2 \text{ns} \times 0.5 \text{ns} = 20 \%$).
 - **Execute (ejecución)**: Interno a la caché/CPU ($4 \text{ns} \times 0.4 \text{ns} = 20 \%$).
 
-:::{admonition} Ventaja
-:class: attention
+```{admonition} Ventaja
+---
+class: attention
+---
 Si el DMAC ocupa un ciclo de bus externo, la CPU no se entera; de hecho, **puede ejecutar fluidamente entre $2$ y $3$ instrucciones** de forma interna simultáneamente.
-:::
+```
 
 (03-entrada-salida-6-3-el-factor-pipeline-segmentacion-de-instrucciones)=
 
