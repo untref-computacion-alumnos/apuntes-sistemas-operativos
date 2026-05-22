@@ -7,6 +7,8 @@ La evolución de las modalidades de ejecución de programas estuvo históricamen
 
 A medida que el hardware se volvió más accesible y potente, el foco de los **sistemas operativos** mutó desde la optimización absoluta del tiempo de CPU hacia la mejora del tiempo de respuesta y la interactividad.
 
+---
+
 (01-ejecucion-de-programas-1-ejecucion-manual)=
 
 ## 1. Ejecución manual
