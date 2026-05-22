@@ -1,4 +1,4 @@
-# Teoría de procesos
+# Procesos
 
 En el ámbito de los sistemas operativos modernos, un **proceso** se define formalmente como una unidad de actividad caracterizada por la ejecución de una secuencia de instrucciones, un estado actual y un conjunto de recursos del sistema asociados.
 
