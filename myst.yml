@@ -19,6 +19,7 @@ project:
         - file: contenidos/apuntes/01-ejecucion-de-programas.md
         - file: contenidos/apuntes/02-sistemas-operativos.md
         - file: contenidos/apuntes/03-entrada-salida.md
+        - file: contenidos/apuntes/04-procesos.md
     - title: Materiales
       children:
         - title: Ejercicios
