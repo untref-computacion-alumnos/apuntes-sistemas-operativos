@@ -2,6 +2,8 @@
 
 Para que un sistema operativo moderno pueda gestionar de forma segura y eficiente la multiprogramación, el tiempo compartido y el tiempo real, requiere de mecanismos de hardware que le permitan retomar el control del procesador ante determinados eventos. Estos mecanismos se dividen fundamentalmente en **asíncronos** (provenientes del hardware externo) y **síncronos** (originados por la propia ejecución de instrucciones).
 
+---
+
 (02-sistemas-operativos-1-interrupciones-hardware-interrupts)=
 
 ## 1. Interrupciones (_hardware interrupts_)
@@ -49,6 +51,8 @@ Dependiendo del origen de la señal, el kernel toma diferentes caminos de acció
   - Evaluar las colas de listos y ejecutar un **cambio de contexto (_context switch_)** si el cuanto de tiempo del proceso expiró o si un proceso bloqueado de mayor prioridad pasó a estar listo.
 - **Interrupciones del mundo externo (tiempo real)**: Generalmente disparan una urgencia que rompe el flujo planificado, involucrando la instanciación o el **comienzo inmediato de la ejecución de un proceso nuevo** diseñado específicamente para atender dicho evento.
 
+---
+
 (02-sistemas-operativos-2-traps)=
 
 ## 2. Traps
@@ -79,6 +83,8 @@ Las violaciones de acceso a memoria (como un _page fault_ o un fallo de protecci
 ### 2.2. Traps voluntarios por llamadas al sistema
 
 Es el mecanismo por el cual un programa en Modo Usuario genera deliberadamente un trap (mediante una instrucción de software dedicada, como `INT`, `SYSCALL` o `SYSENTER`) para pasar al Modo Kernel de forma controlada y solicitarle un servicio al sistema operativo.
+
+---
 
 (02-sistemas-operativos-3-clocks-y-timers)=
 
