@@ -68,7 +68,7 @@ Para automatizar la transición entre tareas sin intervención humana, surge el 
 
 ---
 
-(01-ejecucion-de-programas-3-sistemas-batch-procesamiento-por-lotes-de-multiples-tareas-multiprogramacion)=
+(01-ejecucion-de-programas-3-sistemas-batch-procesamiento-por-lotes-de-multiples-tareas)=
 
 ## 3. Sistemas batch (procesamiento por lotes) de múltiples tareas (multiprogramación)
 
@@ -185,7 +185,7 @@ Para soportar estas modalidades (especialmente las multiprogramadas, de tiempo c
 - **Llamada al sistema (_system call_)**: Es un mecanismo síncrono mediante el cual un programa en espacio de usuario solicita explícitamente un servicio al kernel (como leer un archivo o reservar memoria). Provoca un cambio controlado del modo de ejecución del procesador.
 - **Señal (_signal_)**: Es un mecanismo asíncrono utilizado para notificar a un proceso que ocurrió un evento específico (por ejemplo, una violación de memoria, una interrupción por teclado o una alarma de tiempo).
 
-(01-ejecucion-de-programas-7-2-captura-de-señales-en-alto-nivel)=
+(01-ejecucion-de-programas-7-2-captura-de-seniales-en-alto-nivel)=
 
 ### 7.2. Captura de señales en alto nivel
 
