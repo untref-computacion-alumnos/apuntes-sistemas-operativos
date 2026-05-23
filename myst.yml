@@ -23,6 +23,7 @@ project:
         - file: contenidos/apuntes/05-modelos-de-ejecucion.md
         - file: contenidos/apuntes/06-administracion-de-memoria.md
         - file: contenidos/apuntes/07-paginacion.md
+        - file: contenidos/apuntes/08-administracion-de-archivos.md
     - title: Materiales
       children:
         - title: Ejercicios
