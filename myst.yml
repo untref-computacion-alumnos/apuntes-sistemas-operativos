@@ -21,6 +21,7 @@ project:
         - file: contenidos/apuntes/03-entrada-salida.md
         - file: contenidos/apuntes/04-procesos.md
         - file: contenidos/apuntes/05-modelos-de-ejecucion.md
+        - file: contenidos/apuntes/06-administracion-de-memoria.md
     - title: Materiales
       children:
         - title: Ejercicios
