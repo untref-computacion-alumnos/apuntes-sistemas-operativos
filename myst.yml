@@ -36,6 +36,7 @@ project:
             - file: contenidos/materiales/trabajos-practicos/trabajo-practico-2.md
             - file: contenidos/materiales/trabajos-practicos/trabajo-practico-3.md
             - file: contenidos/materiales/trabajos-practicos/trabajo-practico-4.md
+            - file: contenidos/materiales/trabajos-practicos/trabajo-practico-5.md
         - title: Exámenes
           children:
             - file: contenidos/materiales/examenes/final-02-08-2025.md
