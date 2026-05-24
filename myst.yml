@@ -29,6 +29,7 @@ project:
         - file: contenidos/apuntes/11-hilos.md
         - file: contenidos/apuntes/12-multiprocesamiento.md
         - file: contenidos/apuntes/13-seguridad.md
+        - file: contenidos/apuntes/14-sistemas-empotrados.md
     - title: Materiales
       children:
         - title: Ejercicios
