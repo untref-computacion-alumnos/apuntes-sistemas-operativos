@@ -26,6 +26,7 @@ project:
         - file: contenidos/apuntes/08-administracion-de-archivos.md
         - file: contenidos/apuntes/09-concurrencia.md
         - file: contenidos/apuntes/10-mensajes.md
+        - file: contenidos/apuntes/11-hilos.md
     - title: Materiales
       children:
         - title: Ejercicios
