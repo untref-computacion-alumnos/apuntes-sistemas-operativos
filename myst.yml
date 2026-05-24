@@ -27,6 +27,7 @@ project:
         - file: contenidos/apuntes/09-concurrencia.md
         - file: contenidos/apuntes/10-mensajes.md
         - file: contenidos/apuntes/11-hilos.md
+        - file: contenidos/apuntes/12-multiprocesamiento.md
     - title: Materiales
       children:
         - title: Ejercicios
