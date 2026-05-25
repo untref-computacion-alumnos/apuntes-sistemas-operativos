@@ -7,7 +7,7 @@
 Es conocido que el principio de localidad permite asignar a un programa solo unas pocas páginas de memoria real en cada momento en lugar de asignar memoria a todo el programa.
 
 - ¿El principio de localidad es beneficioso, perjudicial o instrascendente para la memoria caché?
-- Qué ocurre con la cantidad de filas del _TLB_ (_Translation Lookaside Buffer_)?
+- ¿Qué ocurre con la cantidad de filas del _TLB_ (_Translation Lookaside Buffer_)?
 - ¿Hay algún otro componente del sistema operativo o de la arquitectura de soporte que podría ser beneficiado o perjudicado por el principio de localidad?
 
 (final-regular-2025-02-21-ejercicio-2)=
