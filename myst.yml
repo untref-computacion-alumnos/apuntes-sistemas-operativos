@@ -46,6 +46,7 @@ project:
             - file: contenidos/materiales/trabajos-practicos/trabajo-practico-5.md
         - title: Exámenes
           children:
+            - file: contenidos/materiales/examenes/final-regular-2019-12-13.md
             - file: contenidos/materiales/examenes/final-regular-2025-08-02.md
 site:
   template: book-theme
