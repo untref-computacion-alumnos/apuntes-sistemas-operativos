@@ -55,6 +55,7 @@ project:
             - file: contenidos/materiales/examenes/final-regular-2024-07-16.md
             - file: contenidos/materiales/examenes/final-regular-2025-02-21.md
             - file: contenidos/materiales/examenes/final-regular-2025-08-02.md
+            - file: contenidos/materiales/examenes/final-regular-2025-12-12.md
 site:
   template: book-theme
   title: Apuntes de Sistemas Operativos
