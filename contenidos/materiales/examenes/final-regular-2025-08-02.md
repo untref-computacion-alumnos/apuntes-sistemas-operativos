@@ -1,4 +1,4 @@
-# Final - 02/08/2025
+# Sistemas Operativos - Final Regular - 02/08/2025
 
 ## Ejercicio 1
 
