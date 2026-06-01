@@ -61,9 +61,9 @@ Para poder gestionar lso procesos, el sistema operativo mantiene una estructura 
 
 Durante su ciclo de vida, un proceso transita por diferentes estados de forma dinámica. La cantidad de estados que un kernel discrimina está ligada directamente a la complejidad de las estructuras de datos que maneja y a los servicios que provee.
 
-(04-procesos-3-1-modelo-primitivo-de-dos-estados)=
+(04-procesos-3-1-modelo-de-dos-estados)=
 
-### 3.1. Modelo primitivo de dos estados
+### 3.1. Modelo de dos estados
 
 Es el esquema más simple, donde un proceso solo puede estar en dos condiciones: **Ejecutando** (en control de la CPU) o **No Ejecutando** (Detenido). Para gestionarlo, el kernel administra:
 
@@ -71,27 +71,71 @@ Es el esquema más simple, donde un proceso solo puede estar en dos condiciones:
 - Una lista de pedidos de uso exclusivo por cada recurso no compartible.
 - Una lista de operaciones pendientes asociadas a cada proceso que las guarda.
 
-(04-procesos-3-2-modelo-academico-de-cinco-estados)=
+```{mermaid}
+flowchart LR
+  A[Comienzo]
+  B((Detenido))
+  C((Ejecución))
+  D[Fin]
+  A --> B
+  B e1@-- Seleccionado --> C
+  C e2@-- Postergado --> B
+  C --> D
+  e1@{ animation: fast }
+  e2@{ animation: fast }
+```
 
-### 3.2. Modelo académico de cinco estados
+(04-procesos-3-2-modelo-de-cinco-estados)=
+
+### 3.2. Modelo de cinco estados
 
 La limitación del modelo de dos estados es que la lista de "No Ejecutando" mezcla procesos que están listos para correr con aquellos que están esperando un periférico lento. El modelo de cinco estados resuelve esto separándolos:
 
-(04-procesos-3-2-1-matriz-de-transicion-de-cinco-estados)=
+- Una lista de procesos listos.
+- Una lista de procesos bloqueados con indicación del motivo.
+- Una lista de pedidos de uso exclusivo por cada recurso no compartible.
+- Una lista de operaciones que se están esperando con indicación de a qué proceso pertenecen.
 
-#### 3.2.1. Matriz de transición de cinco estados
+```{mermaid}
+flowchart LR
+  A[Solicitud]
+  B((Comienzo))
+  C((Listo))
+  D((Ejecución))
+  E((Bloqueado))
+  F((Finalizado))
+  G[Eliminación]
+  A --> B
+  B e1@-- Obtención de recursos --> C
+  C e2@-- Seleccionado --> D
+  D e3@-- Postergado --> C
+  D e4@-- Pedido de servicio --> E
+  E e5@-- Atención del servicio --> C
+  D e6@-- Fin --> F
+  F --> G
+  e1@{ animation: fast }
+  e2@{ animation: fast }
+  e3@{ animation: fast }
+  e4@{ animation: fast }
+  e5@{ animation: fast }
+  e6@{ animation: fast }
+```
+
+(04-procesos-3-2-1-transicion-de-cinco-estados)=
+
+#### 3.2.1. Transición de cinco estados
 
 | Estado Origen | Obtención de Recursos | Selección (Despacho) | Postergación (Desalojo) | Pedido de Servicio | Atención de Servicio | Fin de Ejecución |
-| ------------- | --------------------- | -------------------- | ----------------------- | ------------------ | -------------------- | ---------------- |
-| Comienzo      | Listo                 |                      |                         |                    |                      |                  |
-| Listo         |                       | Ejecución            |                         |                    |                      |                  |
-| Ejecución     |                       |                      | Listo                   | Bloqueado          |                      | Finalizado       |
-| Bloqueado     |                       |                      |                         |                    | Listo                |                  |
-| Finalizado    |                       |                      |                         |                    |                      |                  |
+| :-----------: | :-------------------: | :------------------: | :---------------------: | :----------------: | :------------------: | :--------------: |
+|   Comienzo    |         Listo         |                      |                         |                    |                      |                  |
+|     Listo     |                       |      Ejecución       |                         |                    |                      |                  |
+|   Ejecución   |                       |                      |          Listo          |     Bloqueado      |                      |    Finalizado    |
+|   Bloqueado   |                       |                      |                         |                    |        Listo         |                  |
+|  Finalizado   |                       |                      |                         |                    |                      |                  |
 
-(04-procesos-3-2-2-analisis-mecanico-de-las-transiciones-criticas)=
+(04-procesos-3-2-2-analisis-de-las-transiciones-criticas)=
 
-#### 3.2.2. Análisis mecánico de las transiciones críticas
+#### 3.2.2. Análisis de las transiciones críticas
 
 - **Selección (Listo $\rightarrow$ Ejecución)**: El planificador de corto plazo exige un proceso de la cola de listos para ocupar la CPU.
   - **En sistemas batch**: Ocurre únicamente cuando el proceso actual termina o solicita una $E/S$ de forma voluntaria.
@@ -99,6 +143,49 @@ La limitación del modelo de dos estados es que la lista de "No Ejecutando" mezc
 - **Postergación (Ejecución $\rightarrow$ Listo)**: El proceso es desalojado de la CPU de forma involuntaria.
   - **En sistemas batch**: Se dispara si concluye la operación de $E/S$ de un proceso suspendido que posee **mayor prioridad** que el actual en ejecución.
   - **En sistemas de tiempo compartido**: Se genera de forma mandatoria por la interrupción del timer al **agotarse la ventana de tiempo (_quantum_) otorgada**.
+
+(04-procesos-3-3-modelo-de-comilla-cinco-comilla-estados)=
+
+### 3.3. Modelo de 'cinco' estados
+
+```{mermaid}
+flowchart LR
+  A((Comienzo))
+  B((Listo))
+  C((Ejecución))
+  D((Bloqueado))
+  E((Finalizado))
+  F((Inexistente))
+  A e1@-- Obtención de recursos --> B
+  B e2@-- Seleccionado --> C
+  C e3@-- Postergado --> B
+  C e4@-- Pedido de servicio --> D
+  C e5@-- Fin --> E
+  D e6@-- Atención del servicio --> B
+  E e7@-- Eliminación --> F
+  F e8@-- Solicitud --> A
+  e1@{ animation: fast }
+  e2@{ animation: fast }
+  e3@{ animation: fast }
+  e4@{ animation: fast }
+  e5@{ animation: fast }
+  e6@{ animation: fast }
+  e7@{ animation: fast }
+  e8@{ animation: fast }
+```
+
+(04-procesos-3-3-1-transicion-de-comilla-cinco-comilla-estados)=
+
+#### 3.3.1. Trancición de 'cinco' estados
+
+|             | Solicitud | Obtención de recursos | Selección | Postergación | Pedido de servicio | Atención de servicio |    Fin     | Eliminación |
+| :---------: | :-------: | :-------------------: | :-------: | :----------: | :----------------: | :------------------: | :--------: | :---------: |
+| Inexistente | Comienzo  |                       |           |              |                    |                      |            |             |
+|  Comienzo   |           |         Listo         |           |              |                    |                      |            |             |
+|    Listo    |           |                       | Ejecución |              |                    |                      |            |             |
+|  Ejecución  |           |                       |           |    Listo     |     Bloqueado      |                      | Finalizado |             |
+|  Bloqueado  |           |                       |           |              |                    |        Listo         |            |             |
+| Finalizado  |           |                       |           |              |                    |                      |            | Inexistente |
 
 ---
 
@@ -120,13 +207,13 @@ Se considera una traza temporal de 19 unidades de tiempo con 4 procesos, donde l
 - `E`: Ejecución.
 - `B`: Bloqueado.
 
-| Proceso | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  | 17  | 18  | 19  |
-| ------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| P1      | X   | X   | X   | C   | L   | E   | E   | E   | B   | B   | B   | B   | B   | B   | B   | B   | B   | B   | E   |
-| P2      | X   | X   | X   | X   | X   | X   | X   | C   | L   | E   | E   | E   | B   | B   | B   | B   | B   | B   | B   |
-| P3      | C   | L   | E   | E   | E   | L   | L   | L   | E   | L   | L   | L   | E   | E   | E   | B   | B   | B   | B   |
-| P4      | X   | C   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | E   | E   | B   | B   |
-| Nulo    | E   | E   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | E   | L   |
+| Proceso |   1   |   2   |   3   |   4   |   5   |   6   |   7   |   8   |   9   |  10   |  11   |  12   |  13   |  14   |  15   |  16   |  17   |  18   |  19   |
+| :-----: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+|   P1    |   X   |   X   |   X   |   C   |   L   |   E   |   E   |   E   |   B   |   B   |   B   |   B   |   B   |   B   |   B   |   B   |   B   |   B   |   E   |
+|   P2    |   X   |   X   |   X   |   X   |   X   |   X   |   X   |   C   |   L   |   E   |   E   |   E   |   B   |   B   |   B   |   B   |   B   |   B   |   B   |
+|   P3    |   C   |   L   |   E   |   E   |   E   |   L   |   L   |   L   |   E   |   L   |   L   |   L   |   E   |   E   |   E   |   B   |   B   |   B   |   B   |
+|   P4    |   X   |   C   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   E   |   E   |   B   |   B   |
+|  Nulo   |   E   |   E   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   E   |   L   |
 
 (04-procesos-4-1-1-calculo-del-porcentaje-de-utilizacion-de-la-cpu)=
 
@@ -144,13 +231,13 @@ $$
 
 Al implementar **hilos de ejecución** dentro de un mismo proceso o aplicar **mecanismos combinados** (como la creación de rondas diferenciadas por prioridad o la extensión dinámica de la ventana de tiempo), se logra una alternancia mucho más fina y adaptativa:
 
-| Proceso | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  | 17  | 18  | 19  |
-| ------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| P1      | X   | X   | X   | C   | L   | E   | E   | L   | E   | L   | L   | E   | B   | B   | B   | B   | B   | B   | B   |
-| P2      | X   | X   | X   | X   | X   | X   | X   | C   | L   | E   | L   | L   | E   | L   | E   | B   | B   | B   | B   |
-| P3      | C   | L   | E   | L   | E   | L   | L   | E   | L   | L   | E   | L   | L   | E   | E   | E   | L   | E   | B   |
-| P4      | X   | C   | L   | E   | L   | E   | B   | B   | B   | B   | B   | B   | B   | B   | B   | B   | E   | L   | E   |
-| Nulo    | E   | E   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   | L   |
+| Proceso |   1   |   2   |   3   |   4   |   5   |   6   |   7   |   8   |   9   |  10   |  11   |  12   |  13   |  14   |  15   |  16   |  17   |  18   |  19   |
+| :-----: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+|   P1    |   X   |   X   |   X   |   C   |   L   |   E   |   E   |   L   |   E   |   L   |   L   |   E   |   B   |   B   |   B   |   B   |   B   |   B   |   B   |
+|   P2    |   X   |   X   |   X   |   X   |   X   |   X   |   X   |   C   |   L   |   E   |   L   |   L   |   E   |   L   |   E   |   B   |   B   |   B   |   B   |
+|   P3    |   C   |   L   |   E   |   L   |   E   |   L   |   L   |   E   |   L   |   L   |   E   |   L   |   L   |   E   |   E   |   E   |   L   |   E   |   B   |
+|   P4    |   X   |   C   |   L   |   E   |   L   |   E   |   B   |   B   |   B   |   B   |   B   |   B   |   B   |   B   |   B   |   B   |   E   |   L   |   E   |
+|  Nulo   |   E   |   E   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |   L   |
 
 (04-procesos-4-2-1-calculo-del-nuevo-rendimiento)=
 
@@ -191,9 +278,46 @@ El fenómeno de mover procesos al disco obliga a romper el modelo clásico de 5 
 1. **Listo y Suspendido (Casi Listo)**: El proceso tiene todas las condiciones para ejecutar, pero **carece de memoria física** por haber sido movido al disco.
 2. **Bloqueado y Suspendido**: El proceso está esperando un evento de $E/S$ y, además, fue desalojado de la memoria RAM hacia el disco.
 
-(04-procesos-6-mecanica-de-entrada-al-modo-privilegiado-del-cpu)=
+```{mermaid}
+flowchart LR
+  A[Solicitud]
+  B((Comienzo))
+  C((Listo en memoria))
+  D((Ejecución))
+  E((Bloqueado en memoria))
+  F((Bloqueado swapped))
+  G((Listo swapped))
+  H((Finalizado))
+  I[Eliminación]
+  A --> B
+  B e1@-- Obtención de recursos --> C
+  B e2@-- Obtención de recursos --> G
+  C e3@-- Seleccionado --> D
+  D e4@-- Postergado --> C
+  D e5@-- Pedido de servicio --> E
+  D e6@-- Fin --> H
+  E e7@-- Atención del servicio --> C
+  E e8@-- Retiro de memoria --> F
+  F e9@-- Retorno a memoria --> E
+  F e10@-- Atención del servicio --> G
+  G e11@-- Retorno a memoria --> C
+  H --> I
+  e1@{ animation: fast }
+  e2@{ animation: fast }
+  e3@{ animation: fast }
+  e4@{ animation: fast }
+  e5@{ animation: fast }
+  e6@{ animation: fast }
+  e7@{ animation: fast }
+  e8@{ animation: fast }
+  e9@{ animation: fast }
+  e10@{ animation: fast }
+  e11@{ animation: fast }
+```
 
-## 6. Mecánica de entrada al Modo Privilegiado del CPU
+(04-procesos-6-entrada-al-modo-privilegiado-del-cpu)=
+
+## 6. Entrada al Modo Privilegiado del CPU
 
 El **Modo Privilegiado** (Modo Kernel o Supervisor) es una propiedad nativa del hardware del procesador que le otorga al software que se ejecuta bajo dicho estado la potestad de invocar instrucciones privilegiadas y acceder a recursos físicos e internos totalmente invisibles e inaccesibles para las aplicaciones comunes de usuario.
 
@@ -209,3 +333,130 @@ El procesador solo conmuta al Modo Privilegiado ante la ocurrencia de tres vecto
 1. **Pedido de servicio (llamada al sistema/_system call_)**: Es un acto deliberado e intencional del proceso de usuario. Se ejecuta mediante instrucciones especiales de software (como `INT#21H` en entornos históricos o arquitecturas x86, o llamadas mediante vectores específicos). Al dispararse, los registros del procesador tienen que contener los códigos del servicio solicitado y los parámetros requeridos para su ejecución.
 2. **Trap (excepción por programa)**: Un hecho síncrono provocado por un error grave en la instrucción actual del proceso de usuario (como una división por cero o un fallo de página). Obliga al hardware a transferir el control a la rutina de manejo de excepciones del kernel en modo privilegiado.
 3. **Interrupción de hardware (periféricos o timer)**: Un suceso completamente asíncrono, externo y ajeno a la instrucción que la CPU está procesando en ese instante preciso. Fuerza el resguardo de contexto inmediato y salta a la ISR del sistema operativo bajo el esquema de máxima jerarquía de privilegios.
+
+(04-procesos-7-tablas-basicas-de-un-sistema-operativo)=
+
+## 7. Tablas básicas de un sistema operativo
+
+```{mermaid}
+flowchart TB
+  subgraph BLOCK_1[" "]
+    A(Memoria)
+    B(Dispositivos)
+    C(Archivos)
+    D(Procesos)
+  end
+
+  subgraph BLOCK_2[" "]
+    E( )
+  end
+
+  subgraph BLOCK_3[" "]
+    F(Dispositivo 1)
+    G(Dispositivo 2)
+    H(Dispositivo n)
+  end
+
+  subgraph BLOCK_4[" "]
+    I(Archivo 1)
+    J(Archivo 2)
+    K(Archivo n)
+  end
+
+  subgraph BLOCK_5[" "]
+    L(Proceso 1)
+    M(Proceso 2)
+    N(Proceso n)
+  end
+
+  style BLOCK_1 fill:#f9f9f9,stroke:#333,stroke-width:2px
+  style BLOCK_2 fill:#f9f9f9,stroke:#333,stroke-width:2px
+  style BLOCK_3 fill:#f9f9f9,stroke:#333,stroke-width:2px
+  style BLOCK_4 fill:#f9f9f9,stroke:#333,stroke-width:2px
+  style BLOCK_5 fill:#f9f9f9,stroke:#333,stroke-width:2px
+
+  A --> E
+  B --> F
+  C --> I
+  D --> L
+
+  F --> G
+  G -- ... --> H
+
+  I --> J
+  J -- ... --> K
+
+  L --> M
+  M -- ... --> N
+```
+
+```{mermaid}
+flowchart TB
+  subgraph BLOCK_1[" "]
+    A(Memoria)
+    B(Dispositivos)
+    C(Archivos)
+    D(Procesos)
+  end
+
+  subgraph BLOCK_2[" "]
+    E( )
+  end
+
+  subgraph BLOCK_3[" "]
+    F(Dispositivo 1)
+    G(Dispositivo 2)
+    H(Dispositivo n)
+  end
+
+  subgraph BLOCK_4[" "]
+    I(Archivo 1)
+    J(Archivo 2)
+    K(Archivo n)
+  end
+
+  subgraph BLOCK_5[" "]
+    L(Ejecución)
+    M(Listo en memoria)
+    N(Listo swapped)
+    O(Bloqueado en memoria)
+    P(Bloqueado swapped)
+  end
+
+  Q( )
+
+  R(PCB Proceso 1)
+  S(PCB Proceso n)
+
+  T(PCB Proceso 1)
+  U(PCB Proceso n)
+
+  V(PCB Proceso 1)
+  W(PCB Proceso n)
+
+  X(PCB Proceso 1)
+  Y(PCB Proceso n)
+
+  style BLOCK_1 fill:#f9f9f9,stroke:#333,stroke-width:2px
+  style BLOCK_2 fill:#f9f9f9,stroke:#333,stroke-width:2px
+  style BLOCK_3 fill:#f9f9f9,stroke:#333,stroke-width:2px
+  style BLOCK_4 fill:#f9f9f9,stroke:#333,stroke-width:2px
+  style BLOCK_5 fill:#f9f9f9,stroke:#333,stroke-width:2px
+
+  A --> E
+  B --> F
+  C --> I
+  D --> L
+
+  F --> G
+  G -- ... --> H
+
+  I --> J
+  J -- ... --> K
+
+  L --> Q
+  M --> R -- ... --> S
+  N --> T -- ... --> U
+  O --> V -- ... --> W
+  P --> X -- ... --> Y
+```
