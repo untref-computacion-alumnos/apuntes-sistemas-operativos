@@ -47,6 +47,9 @@ project:
             - file: contenidos/materiales/trabajos-practicos/trabajo-practico-6.md
         - title: Exámenes
           children:
+            - file: contenidos/materiales/examenes/parcial-####-##-##-1.md
+            - file: contenidos/materiales/examenes/parcial-####-##-##-2.md
+            - file: contenidos/materiales/examenes/parcial-####-##-##-3.md
             - file: contenidos/materiales/examenes/final-regular-2015-12-16.md
             - file: contenidos/materiales/examenes/final-regular-2017-11-13.md
             - file: contenidos/materiales/examenes/final-regular-2018-02-19.md
