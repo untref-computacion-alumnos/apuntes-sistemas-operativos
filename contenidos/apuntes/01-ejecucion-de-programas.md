@@ -102,6 +102,37 @@ La convivencia de múltiples programas en la memoria central y la disputa por la
 - **Mecanismos de sincronización e interacción**: Primitivas para permitir la comunicación segura entre tareas concurrentes y evitar condiciones de carrera o bloqueos mutuos (_abrazo mortal_ o _deadlock_).
 - **Estadísticas de consumo**: Registro del tiempo de CPU y uso de recursos por tarea para fines de auditoría y facturación interna.
 
+(01-ejecucion-de-programas-3-5-niveles-de-interaccion)=
+
+### 3.5. Niveles de interacción
+
+```{mermaid}
+flowchart TB
+  A(Usuario final)
+  B(Programador)
+  C(Creador del sistema operativo)
+
+  subgraph G[Equipo]
+      subgraph F[Sistema operativo]
+          subgraph Capa_Superior[" "]
+              direction LR
+              E[Herramientas]
+              H[Shell]
+              D[Aplicación]
+          end
+      end
+  end
+
+  A ----> D
+  A ----> H
+  B ----> E
+  B ----> F
+  B ----> H
+  C ----> G
+
+  style Capa_Superior fill:none,stroke:none
+```
+
 ---
 
 (01-ejecucion-de-programas-4-sistemas-de-tiempo-compartido-time-sharing)=
@@ -185,9 +216,43 @@ Para soportar estas modalidades (especialmente las multiprogramadas, de tiempo c
 - **Llamada al sistema (_system call_)**: Es un mecanismo síncrono mediante el cual un programa en espacio de usuario solicita explícitamente un servicio al kernel (como leer un archivo o reservar memoria). Provoca un cambio controlado del modo de ejecución del procesador.
 - **Señal (_signal_)**: Es un mecanismo asíncrono utilizado para notificar a un proceso que ocurrió un evento específico (por ejemplo, una violación de memoria, una interrupción por teclado o una alarma de tiempo).
 
-(01-ejecucion-de-programas-7-2-captura-de-seniales-en-alto-nivel)=
+(01-ejecucion-de-programas-7-2-intercambio-de-modo-entre-espacios-de-memoria)=
 
-### 7.2. Captura de señales en alto nivel
+### 7.2. Intercambio de modo entre espacios de memoria
+
+Para garantizar la exclusión mutua, las solicitudes y las señales transitan a través de fronteras de hardware definidas:
+
+ ```{mermaid}
+flowchart TB
+  A(Usuario) ---> Espacio_Usuario
+
+  subgraph Espacio_Usuario [Usuario]
+    direction LR
+    H[Aplicaciones]
+    I[Shell]
+    J[Herramientas]
+  end
+
+  subgraph Espacio_Kernel [Sistema operativo]
+    direction TB
+    K[Interfaz de System Calls]
+    S[Manejador de Señales / Internals]
+    subgraph HW [Hardware]
+      CPU[CPU / Disco / Memoria]
+    end
+  end
+
+  Espacio_Usuario ===>|Invocan System Call| K
+  K --->|Ejecuta en modo protegido| HW
+  HW -.->|Devuelve resultado| K
+  K -.->|Retorno de la Syscall| Espacio_Usuario
+
+  S ==>|Envía Señal| Espacio_Usuario
+```
+
+(01-ejecucion-de-programas-7-3-captura-de-seniales-en-alto-nivel)=
+
+### 7.3. Captura de señales en alto nivel
 
 Los lenguajes de programación interactúan con las señales del sistema operativo permitiendo definir rutinas de captura personalizadas.
 
@@ -220,3 +285,46 @@ flowchart LR
    - **X-Windows (X11)**: Arquitectura cliente-servidor de red para entornos gráficos en sistemas Unix/Linux. Actualmente se busca reemplazar por **Wayland**.
    - **macOS**: Integración fluida de una interfaz gráfica de alta fidelidad sobre bases sólidas de sistemas tipo Unix.
    - **Windows 3.1/Windows NT**: Transición de Microsoft desde un entorno gráfico corriendo sobre una base batch/CLI (MS-DOS) hacia un sistema operativo con un kernel multiprogramado real y subsistema gráfico integrado de alto rendimiento (**Windows NT** y sucesores modernos).
+
+(01-ejecucion-de-programas-8-1-capas-logicas-en-subsistemas-graficos-gui)=
+
+### 8.1. Capas lógicas en subsistemas gráficos (_GUI_)
+
+La incorporación de un entorno gráfico asocia la captura de eventos físicos de entrada/salida con llamadas del subsistema de ventanas sincronizadas con el núcleo:
+
+ ```{mermaid}
+flowchart TB
+  A(Usuario) ---> H
+
+  subgraph Espacio_Usuario [Usuario]
+    direction LR
+    H[Aplicaciones]
+    E_Prop[Eventos propios]
+  end
+
+  subgraph Interfaz_Grafica [Interfaz gráfica]
+    T[Eventos gráficos]
+    API_GUI[API a la interfaz gráfica]
+  end
+
+  subgraph Espacio_Kernel [Sistema operativo]
+    direction TB
+    API_SO[API al sistema operativo]
+    K[Interfaz de System Calls]
+    subgraph HW [Hardware]
+      CPU[CPU / Disco / Memoria]
+    end
+  end
+
+  %% Conexiones solicitadas
+  T ---> H
+  H ---> API_GUI
+  H ---> E_Prop
+  H ---> API_SO
+
+  %% Flujo base de System Calls
+  API_SO ===>|Invocan System Call| K
+  K --->|Ejecuta en modo protegido| HW
+  HW -.->|Devuelve resultado| K
+  K -.->|Retorno de la Syscall| H
+```
