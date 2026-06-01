@@ -1,5 +1,13 @@
 # Trabajo Práctico 2
 
+(trabajo-practico-2-tablas)=
+
+## Tablas
+
+(trabajo-practico-2-tabla-1)=
+
+### Tabla 1
+
 | Proceso | CPU | E/S | CPU | E/S | CPU | E/S | CPU | E/S | Total CPU | Total E/S | Total | % E/S |
 | ------- | --- | --- | --- | --- | --- | --- | --- | --- | --------- | --------- | ----- | ----- |
 | 1       | 6   | 40  | 6   | 28  | 6   | 16  | 6   | 32  |           |           |       |       |
@@ -7,6 +15,10 @@
 | 3       | 4   | 10  | 2   | 16  | 2   | 10  | 2   | 10  |           |           |       |       |
 | 4       | 8   | 12  | 4   | 14  | 6   | 10  | 10  | 20  |           |           |       |       |
 | Total   |     |     |     |     |     |     |     |     |           |           |       |       |
+
+(trabajo-practico-2-tabla-2)=
+
+### Tabla 2
 
 | Proceso | CPU | E/S | CPU | E/S | CPU | E/S | CPU | E/S | Total CPU | Total E/S | Total | % E/S |
 | ------- | --- | --- | --- | --- | --- | --- | --- | --- | --------- | --------- | ----- | ----- |
@@ -20,63 +32,40 @@
 
 ## Ejercicio 1
 
-Con los datos de la primer tabla dibujar los hijos de ejecución de los cuatro procesos suponiendo
-que se trata de un sistema operativo Batch, priorizando aquellos proyectos cuyo cociente:
-
-Uso de CPU / Uso de E/S es mayor
-
-(medidos ambos en unidades de tiempo)
+Con los datos de la primer tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo Batch, priorizando aquellos proyectos cuyo cociente $\frac{\text{Uso de CPU}}{\text{Uso de E/S}}$ es mayor (medidos ambos en unidades de tiempo).
 
 (trabajo-practico-2-ejercicio-2)=
 
 ## Ejercicio 2
 
-Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo
-que se trata de un sistema operativo Batch, priorizando arquellos proyectos cuyo cociente:
-
-Uso de CPU / Uso de E/S es mayor
-
-(medidos ambos en unidades de tiempo)
+Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo Batch, priorizando arquellos proyectos cuyo cociente $\frac{\text{Uso de CPU}}{\text{Uso de E/S}}$ es mayor (medidos ambos en unidades de tiempo).
 
 (trabajo-practico-2-ejercicio-3)=
 
 ## Ejercicio 3
 
-Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo
-que se trata de un sistema operativo Batch, priorizando aquellos proyectos cuyo cociente:
-
-Uso de CPU / Uso de E/S es menor
-
-(medidos ambos en unidades de tiempo)
+Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo Batch, priorizando aquellos proyectos cuyo cociente $\frac{\text{Uso de CPU}}{\text{Uso de E/S}}$ es menor (medidos ambos en unidades de tiempo).
 
 (trabajo-practico-2-ejercicio-4)=
 
 ## Ejercicio 4
 
-Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo
-que se trata de un sistema operativo de tiempo compartido. Utilizar una ventana de tiempo de cuatro
-unidades.
+Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo de tiempo compartido. Utilizar una ventana de tiempo de cuatro unidades.
 
 (trabajo-practico-2-ejercicio-5)=
 
 ## Ejercicio 5
 
-Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo
-que se trata de un sistema operativo de tiempo compartido. Utilizar una ventana de tiempo de ocho
-unidades.
+Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo de tiempo compartido. Utilizar una ventana de tiempo de ocho unidades.
 
 (trabajo-practico-2-ejercicio-6)=
 
 ## Ejercicio 6
 
-Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo
-que se trata de un sistema operativo de tiempo compartido con una ventana de tiempo de cuatro
-unidades, en el que los procesos 2 y 3 conforman una ronda con más prioridad que los procesos 1 y 4.
+Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo de tiempo compartido con una ventana de tiempo de cuatro unidades, en el que los procesos 2 y 3 conforman una ronda con más prioridad que los procesos 1 y 4.
 
 (trabajo-practico-2-ejercicio-7)=
 
 ## Ejercicio 7
 
-Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo
-que se trata de un sistema operativo de tiempo compartido en el que los procesos 2 y 3 poseen una
-ventana de tiempo de 8 unidades y los procesos 1 y 4 una ventana de tiempo de 4 unidades.
+Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo de tiempo compartido en el que los procesos 2 y 3 poseen una ventana de tiempo de 8 unidades y los procesos 1 y 4 una ventana de tiempo de 4 unidades.
