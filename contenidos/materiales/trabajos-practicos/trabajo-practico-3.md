@@ -46,7 +46,7 @@ for (int k = 0; k < 100; k++) {
 Considerar un computador que posee un bus con 16 líneas de direcciones y 32 líneas de datos, en el
 que cada dirección se refiere a una palabra de 32 bits. El sistema operativo ocupa 36KB y se
 encuentra ubicado en las direcciones más bajas. En el mismo se instaló una memoria hasta la
-dirección 13FFF. La primera partición fija es de 64KB y se ubica a continuación del sistema
+dirección EFFF. La primera partición fija es de 64KB y se ubica a continuación del sistema
 operativo. En el resto de la memoria se planifica crear particiones chicas de 32KB.
 
 1. ¿Cuántas particiones chicas se pueden crear?
