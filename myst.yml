@@ -40,6 +40,7 @@ project:
         - title: Trabajos Prácticos
           children:
             - file: contenidos/materiales/trabajos-practicos/trabajo-practico-1.md
+            # - file: contenidos/materiales/trabajos-practicos/trabajo-practico-1-resuelto.md
             - file: contenidos/materiales/trabajos-practicos/trabajo-practico-2.md
             - file: contenidos/materiales/trabajos-practicos/trabajo-practico-3.md
             - file: contenidos/materiales/trabajos-practicos/trabajo-practico-4.md
