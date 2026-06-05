@@ -4,7 +4,7 @@
 
 ## Ejercicio 1
 
-Se tiene un disco que gira a 3000 revoluciones por minuto. En la zona media, este disco tiene 5040 sectores de 4096 bytes cada uno.
+Se tiene un disco que gira a $3000 \text{ RPM}$. En la zona media, este disco tiene $5040$ sectores de $4096 \text{ B}$ cada uno.
 
 ¿Cuáles serán los números que se asignan a los veinte primeros sectores físicos de esa pista, sabiendo que el controlador necesita como máximo 25 microsegundos para procesar el sector anterior?
 
@@ -14,17 +14,17 @@ Se tiene un disco que gira a 3000 revoluciones por minuto. En la zona media, est
 
 En el mismo disco del {ref}`trabajo-practico-5-ejercicio-1`.
 
-¿Qué ocurre si el disco gira a 6000 revoluciones por minuto?
+¿Qué ocurre si el disco gira a $6000 \text{ RPM}$?
 
 (trabajo-practico-5-ejercicio-3)=
 
 ## Ejercicio 3
 
-¿Cuál es la capacidad de un disco que posee la siguiente cantidad de sectores de 4096 bytes que se indica?
+¿Cuál es la capacidad de un disco que posee la siguiente cantidad de sectores de $4096 \text{ B}$ que se indica?
 
-Pistas $0$ a $131071 \rightarrow 12540 \text{ sectores}$
-Pistas $131072$ a $196607 \rightarrow 12080 \text{ sectores}$
-Pistas $196608$ a $327679 \rightarrow 12900 \text{ sectores}$
+- Pistas $0$ a $131071 \rightarrow 12540 \text{ sectores}$
+- Pistas $131072$ a $196607 \rightarrow 12080 \text{ sectores}$
+- Pistas $196608$ a $327679 \rightarrow 12900 \text{ sectores}$
 
 (trabajo-practico-5-ejercicio-4)=
 
