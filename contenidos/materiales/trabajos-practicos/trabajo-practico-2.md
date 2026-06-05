@@ -32,40 +32,44 @@
 
 ## Ejercicio 1
 
-Con los datos de la primer tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo Batch, priorizando aquellos proyectos cuyo cociente $\frac{\text{Uso de CPU}}{\text{Uso de E/S}}$ es mayor (medidos ambos en unidades de tiempo).
+Con los datos de la {ref}`trabajo-practico-2-tabla-1` dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo _batch_, priorizando aquellos proyectos cuyo cociente $\frac{\text{Uso de CPU}}{\text{Uso de E/S}}$ es mayor (medidos ambos en unidades de tiempo).
 
 (trabajo-practico-2-ejercicio-2)=
 
 ## Ejercicio 2
 
-Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo Batch, priorizando arquellos proyectos cuyo cociente $\frac{\text{Uso de CPU}}{\text{Uso de E/S}}$ es mayor (medidos ambos en unidades de tiempo).
+Con los datos de la {ref}`trabajo-practico-2-tabla-2` dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo _batch_, priorizando arquellos proyectos cuyo cociente $\frac{\text{Uso de CPU}}{\text{Uso de E/S}}$ es mayor (medidos ambos en unidades de tiempo).
 
 (trabajo-practico-2-ejercicio-3)=
 
 ## Ejercicio 3
 
-Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo Batch, priorizando aquellos proyectos cuyo cociente $\frac{\text{Uso de CPU}}{\text{Uso de E/S}}$ es menor (medidos ambos en unidades de tiempo).
+Con los datos de la {ref}`trabajo-practico-2-tabla-2` dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo _batch_, priorizando aquellos proyectos cuyo cociente $\frac{\text{Uso de CPU}}{\text{Uso de E/S}}$ es menor (medidos ambos en unidades de tiempo).
 
 (trabajo-practico-2-ejercicio-4)=
 
 ## Ejercicio 4
 
-Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo de tiempo compartido. Utilizar una ventana de tiempo de cuatro unidades.
+Con los datos de la {ref}`trabajo-practico-2-tabla-2` dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo de tiempo compartido.
+
+Utilizar una ventana de tiempo de cuatro unidades.
 
 (trabajo-practico-2-ejercicio-5)=
 
 ## Ejercicio 5
 
-Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo de tiempo compartido. Utilizar una ventana de tiempo de ocho unidades.
+Con los datos de la {ref}`trabajo-practico-2-tabla-2` dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo de tiempo compartido.
+
+Utilizar una ventana de tiempo de ocho unidades.
 
 (trabajo-practico-2-ejercicio-6)=
 
 ## Ejercicio 6
 
-Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo de tiempo compartido con una ventana de tiempo de cuatro unidades, en el que los procesos 2 y 3 conforman una ronda con más prioridad que los procesos 1 y 4.
+Con los datos de la {ref}`trabajo-practico-2-tabla-2` dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo de tiempo compartido con una ventana de tiempo de cuatro unidades, en el que los procesos 2 y 3 conforman una ronda con más prioridad que los procesos 1 y 4.
 
 (trabajo-practico-2-ejercicio-7)=
 
 ## Ejercicio 7
 
-Con los datos de la segunda tabla dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo de tiempo compartido en el que los procesos 2 y 3 poseen una ventana de tiempo de 8 unidades y los procesos 1 y 4 una ventana de tiempo de 4 unidades.
+Con los datos de la {ref}`trabajo-practico-2-tabla-2` dibujar los hilos de ejecución de los cuatro procesos suponiendo que se trata de un sistema operativo de tiempo compartido en el que los procesos 2 y 3 poseen una ventana de tiempo de 8 unidades y los procesos 1 y 4 una ventana de tiempo de 4 unidades.
